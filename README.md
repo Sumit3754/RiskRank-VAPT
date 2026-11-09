@@ -165,11 +165,9 @@ pipeline/Streamlit side, then upload into the web dashboard manually.
    produces it.
 4. Deploy. This stack (TanStack Start + Nitro 3 beta) hasn't been
    deploy-tested on Vercel specifically — if the first build fails, check
-   the build log for the Nitro preset step first; the configured fallbacks
-   are Cloudflare Pages/Workers (the preset this build already targets by
-   default, verified working locally) or the **Publish** button in the
-   connected [Lovable](https://lovable.dev) editor, which needs no config
-   at all.
+   the build log for the Nitro preset step first; the configured fallback
+   is Cloudflare Pages/Workers (the preset this build already targets by
+   default, verified working locally).
 
 ## Data sources
 
