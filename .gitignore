@@ -1,0 +1,15 @@
+# Raw data is fetched on demand via scripts/fetch_raw_data.py (large files)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Models and generated results are reproducible via scripts/run_pipeline.py
+models/*.joblib
+results/figures/*.png
+results/reports/*.csv
+
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.streamlit/
