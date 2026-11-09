@@ -4,10 +4,9 @@ data/raw/*
 data/processed/*
 !data/processed/.gitkeep
 
-# Models and generated results are reproducible via scripts/run_pipeline.py
-models/*.joblib
-results/figures/*.png
-results/reports/*.csv
+# Models and generated results are reproducible via scripts/run_pipeline.py,
+# but are committed anyway so the deployed Streamlit app has data to show
+# without needing to run the pipeline on the hosting platform.
 
 __pycache__/
 *.pyc

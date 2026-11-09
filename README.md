@@ -134,11 +134,42 @@ with standard column names" download). On Comparative Evaluation, upload
 (`cve_id`, `cvss`/`CVSS_base`, `adaptive_psss`/`score_adaptive_psss`,
 `priority`, `in_kev`, `exposure`, …) — see `RISK-RANK-DESIGN/src/lib/data.ts`.
 
-**Deploying it:** `npm run build` outputs a Nitro build (Cloudflare
-Workers/Pages preset by default, configurable in `vite.config.ts`). Since
-the project is connected to [Lovable](https://lovable.dev), the simplest
-path is the **Publish** button in the Lovable editor; alternatively deploy
-`.output/` to Cloudflare, Vercel, or Netlify as a standard Node/edge build.
+## Free deployment
+
+This project deploys as two independent, unconnected sites that both read
+the same exported CSVs — there is no API between them. Export from the
+pipeline/Streamlit side, then upload into the web dashboard manually.
+
+### Streamlit dashboard → Streamlit Community Cloud
+
+1. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with
+   GitHub.
+2. "New app" → pick the `Sumit3754/RiskRank-VAPT` repo, branch `main`,
+   main file path `app.py`. Leave everything else default —
+   `requirements.txt` is auto-detected.
+3. Deploy. `results/reports/*.csv`, `results/figures/*.png` and
+   `models/adaptive_psss_model.joblib` are committed to the repo (not
+   gitignored), so the app has data immediately — no pipeline run needed on
+   the platform.
+
+### Web dashboard (`RISK-RANK-DESIGN`) → Vercel
+
+1. Go to [vercel.com/new](https://vercel.com/new) and import the same
+   `Sumit3754/RiskRank-VAPT` repo.
+2. Set **Root Directory** to `RISK-RANK-DESIGN` (this is a monorepo —
+   `package.json` is not at the repo root).
+3. `vercel.json` in that folder already sets the build command and
+   `NITRO_PRESET=vercel` (overrides the project's Cloudflare-targeted
+   default so Nitro emits Vercel's Build Output format). Framework preset
+   can be left as "Other" — Vercel auto-detects `.vercel/output` once Nitro
+   produces it.
+4. Deploy. This stack (TanStack Start + Nitro 3 beta) hasn't been
+   deploy-tested on Vercel specifically — if the first build fails, check
+   the build log for the Nitro preset step first; the configured fallbacks
+   are Cloudflare Pages/Workers (the preset this build already targets by
+   default, verified working locally) or the **Publish** button in the
+   connected [Lovable](https://lovable.dev) editor, which needs no config
+   at all.
 
 ## Data sources
 

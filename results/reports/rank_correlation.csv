@@ -1,0 +1,4 @@
+,0
+score_cvss_only vs score_static_psss,0.9727262596178979
+score_cvss_only vs score_adaptive_psss,0.9503275129263709
+score_static_psss vs score_adaptive_psss,0.9900090106655596
